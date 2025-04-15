@@ -1,9 +1,13 @@
 package br.com.fiap.TavernaGrimm.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,9 +23,12 @@ public class Personagem {
     @Id
     private String nome;
         
-    @Size(min = 1, max = 99, message = "O nível deve ter entre 1 e 99")
+    @Min(value = 1, message = "O nível deve ser no mínimo 1")
+    @Max(value = 99, message = "O nível deve ser no máximo 99")
     private Integer nivel;
     private Integer moedas;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private PersonagemType classe;
 }
